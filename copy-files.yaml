@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: true
+  become_user: ansadmin
+  tasks:
+    - name: Transfer the script file
+      copy: src=/tmp/test.sh dest=/tmp/test
+    - name: Execute the Script
+      command: sh /tmp/test.sh 

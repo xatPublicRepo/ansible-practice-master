@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: Install telnet package
+    yum:
+      name: telnet
+      state: latest
+  - name: check lldpad service status
+    service:
+      name: telnet
+      state: started

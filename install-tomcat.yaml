@@ -1,0 +1,15 @@
+---
+- hosts: GroupA
+  become: true
+  become_user: root
+  tasks:
+    - name: Install tomcat packages
+      yum: name=tomcat state=latest
+    - name: Start the tomcat service
+      service: name=tomcat state=started
+    - name : Deploy sample.war
+      copy : src=sample.war dest=/usr/share/tomcat/webapps
+      notify: restart tomcat
+  handlers:
+    - name: restart tomcat
+      service: name=tomcat state=restarted

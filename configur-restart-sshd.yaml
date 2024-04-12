@@ -1,0 +1,15 @@
+---
+- hosts: all
+  tasks:
+  - name: sshd config file modify port
+    lineinfile:
+     path: /etc/ssh/sshd_config
+     regexp: 'Port 22'
+     line: '#Port 22'
+    notify:
+       - restart sshd
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: sshd
+        state: restarted
